@@ -24,11 +24,11 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div><a class="navbar-brand" href="../model/index.php?page=1&article=5">Articles</a></div>
-		<div><a class="navbar-brand" href="../model/index.php?page=1&article=5">Mis articles</a></div>
+		<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Articles</a></div>
+		<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Mis articles</a></div>
 		<div class="login">
-			<div><a class="navbar-brand" href="../model/index.php?page=1&article=5">Login</a></div>
-			<div><a class="navbar-brand" href="../model/index.php?page=1&article=5">Register</a></div>
+			<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Login</a></div>
+			<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Register</a></div>
 		</div>
 	</nav>
 	<div class="contenidor">

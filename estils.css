@@ -80,8 +80,16 @@ ul {
 	margin: 0;
 	padding: 0;
   }
-
-div div a:hover{
+nav{
+	display:flex;
+}
+.login{
+	float: right;
+}
+.navBar{
+	margin:2px;
+}
+.navBar:hover{
 	text-decoration: none;
 	background: #399228;
 }
