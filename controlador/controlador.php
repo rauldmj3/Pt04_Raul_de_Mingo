@@ -51,5 +51,8 @@ function checkPass($email,$pass){
     }
     return false;
 }
-
+function encriptar($pass){
+    $hash=password_hash($pass,PASSWORD_BCRYPT);
+    return $hash;
+}
 ?>

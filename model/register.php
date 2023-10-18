@@ -8,14 +8,17 @@ function checkData(){
         $email=validar($_POST["email"]);
         $pass=validar($_POST["pass"]);
         $pass2=validar($_POST["pass2"]);
-        if(checkPass($email,$pass)){
-
+        if($pass == $pass2){
+            $finalPass=encriptar($pass);
+            register($email,$name,$finalPass);
         }
     }
 }
 
-function login(){
-    
+function register($email,$name,$finalPass){
+    $con=conDB();
+    $stt=$con->prepare("INSERT INTO users(email,username,password) VALUES (?,?,?)");
+    $stt->execute([$email,$name,$finalPass]);
 }
 
 require '../vista/register.vista.php';
