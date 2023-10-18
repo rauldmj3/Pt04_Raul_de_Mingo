@@ -33,4 +33,23 @@ function numPagina(){
    
     return ceil($totalArticles/$numArtPag);
 }
+
+function validar($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+function checkPass($email,$pass){
+    if($pass){
+        $con= conDB();
+        $stt=$con->prepare("SELECT password FROM users WHERE email == ?");
+        $stt->execute([$email]);
+        $realPass=$stt->fetch();
+        if(password_verify($pass,$realPass)) return true;
+    }
+    return false;
+}
+
 ?>

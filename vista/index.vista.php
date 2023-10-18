@@ -27,8 +27,8 @@
 		<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Articles</a></div>
 		<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Mis articles</a></div>
 		<div class="login">
-			<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Login</a></div>
-			<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Register</a></div>
+			<div class="navBar"><a class="navbar-brand" href="../model/login.php">Login</a></div>
+			<div class="navBar"><a class="navbar-brand" href="../model/register.php">Register</a></div>
 		</div>
 	</nav>
 	<div class="contenidor">
