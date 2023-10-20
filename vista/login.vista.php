@@ -20,7 +20,7 @@
             <input type="password" name="pass" required="">
             <label>Contraseña</label>
           </div>
-          <input class="btn btn-primary" type="submit" value="Enviar">
+          <input class="btn btn-primary" type="submit" value="Login">
           <input class="btn btn-primary" type="reset" value="Reset">
         </form>
       </div>

@@ -8,7 +8,7 @@ function checkData(){
         $email=validar($_POST["email"]);
         $pass=validar($_POST["pass"]);
         $pass2=validar($_POST["pass2"]);
-        if($pass == $pass2){
+        if(!strcmp($pass,$pass2)){
             $finalPass=encriptar($pass);
             register($email,$name,$finalPass);
         }
@@ -16,9 +16,15 @@ function checkData(){
 }
 
 function register($email,$name,$finalPass){
-    $con=conDB();
-    $stt=$con->prepare("INSERT INTO users(email,username,password) VALUES (?,?,?)");
-    $stt->execute([$email,$name,$finalPass]);
+    try{
+        $con=conDB();
+        $stt=$con->prepare("INSERT INTO users(email,username,password) VALUES (:email,:username,:password)");
+        $stt->execute([":email"=>$email,":username"=>$name,":password"=>$finalPass]);
+    }catch(PDOException $e){
+        echo($e);
+    }finally{
+        require "index.php";
+    }
 }
 
 require '../vista/register.vista.php';
