@@ -44,10 +44,10 @@ function validar($data) {
 function checkPass($email,$pass){
     if($pass){
         $con= conDB();
-        $stt=$con->prepare("SELECT password FROM users WHERE email == ?");
-        $stt->execute([$email]);
-        $realPass=$stt->fetch();
-        if(password_verify($pass,$realPass)) return true;
+        $stt=$con->prepare("SELECT password FROM users WHERE email == :email");
+        $stt->execute([":email"=>$email]);
+        $realPass=$stt->fetchAll(PDO::FETCH_ASSOC);
+        if(password_verify($pass,$realPass[0]["password"])) return true;
     }
     return false;
 }
@@ -55,4 +55,13 @@ function encriptar($pass){
     $hash=password_hash($pass,PASSWORD_BCRYPT);
     return $hash;
 }
+
+function obrirArticlesSession($email){
+    session_start();
+    $_SESSION["email"]= $email;
+    $_SESSION['loggedin'] = true;
+    header("Location: ../model/index.php"); 
+    exit();
+}
+
 ?>

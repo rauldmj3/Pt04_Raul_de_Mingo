@@ -23,7 +23,7 @@ function register($email,$name,$finalPass){
     }catch(PDOException $e){
         echo($e);
     }finally{
-        require "index.php";
+        obrirArticlesSession($email);
     }
 }
 
