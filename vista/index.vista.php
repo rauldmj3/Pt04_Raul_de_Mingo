@@ -38,7 +38,7 @@
 				session_start();
 		?>
 		<div class="navBar"><h1><?php $_SESSION["email"]; ?></h1></div>
-		<div class="navBar"><a class="navbar-brand" href="../model/tancarSessio.php" onclick="<?php header("Location: ../model/tancarSessio.php") ?>"></a>Tancar Sessió</a></div>
+		<div class="navBar"><a class="navbar-brand" href="../model/tancarSessio.php" onclick="w<?php header("Location: ../model/tancarSessio.php") ?>"></a>Tancar Sessió</a></div>
 		<?php 
 			endif;
 		?>
