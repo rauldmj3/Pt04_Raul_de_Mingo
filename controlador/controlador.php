@@ -42,14 +42,13 @@ function validar($data) {
 }
 
 function checkPass($email,$pass){
-    if($pass){
-        $con= conDB();
-        $stt=$con->prepare("SELECT password FROM users WHERE email == :email");
-        $stt->execute([":email"=>$email]);
-        $realPass=$stt->fetchAll(PDO::FETCH_ASSOC);
-        if(password_verify($pass,$realPass[0]["password"])) return true;
-    }
-    return false;
+    
+    $con= conDB();
+    $stt=$con->prepare("SELECT password FROM users WHERE email == :email");
+    $stt->execute([":email"=>$email]);
+    $realPass=$stt->fetchAll();
+    if(password_verify($pass,$realPass[0])) return true;
+    else return false;
 }
 function encriptar($pass){
     $hash=password_hash($pass,PASSWORD_BCRYPT);
@@ -60,7 +59,7 @@ function obrirArticlesSession($email){
     session_start();
     $_SESSION["email"]= $email;
     $_SESSION['loggedin'] = true;
-    header("Location: ../model/index.php"); 
+    header("Location: http://localhost/Back-End/UF1/Pt04_Raul_de_Mingo/model/index.php"); 
     exit();
 }
 
