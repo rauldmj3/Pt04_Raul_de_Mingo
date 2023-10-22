@@ -25,9 +25,10 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Articles</a></div>
-		<div class="navBar"><a class="navbar-brand" href="../model/index.php?page=1&article=5">Mis articles</a></div>
+		<div class="navBar"><a class="navbar-brand" href="../model/articles.php?page=1&article=5">Mis articles</a></div>
 		<?php 
-			if(!$_SESSION['loggedin']):
+			session_start();
+			if(!isset($_SESSION['loggedin'])):
 		?>
 		<div class="login">
 			<div class="navBar"><a class="navbar-brand" href="../model/login.php">Login</a></div>
@@ -35,10 +36,10 @@
 		</div>
 		<?php 
 			else:
-				session_start();
+				
 		?>
 		<div class="navBar"><h1><?php $_SESSION["email"]; ?></h1></div>
-		<div class="navBar"><a class="navbar-brand" href="../model/tancarSessio.php" onclick="w<?php header("Location: ../model/tancarSessio.php") ?>"></a>Tancar Sessió</a></div>
+		<div class="navBar"><a class="navbar-brand" href="../model/tancarSessio.php">Tancar Sessió</a></div>
 		<?php 
 			endif;
 		?>

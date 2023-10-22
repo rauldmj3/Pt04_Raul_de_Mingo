@@ -10,7 +10,8 @@ include_once "../controlador/controlador.php";
  * @return void no devuelve nada ya que lo muestra por pantalla
  */
 function mostrar(){
-    
+    if(isset($_SESSION["email"]))$email=$_SESSION["email"];
+    else $email="";
     if(!isset($_GET["article"])){
         $numArtPag=5;
         $numId=0;
@@ -21,23 +22,19 @@ function mostrar(){
     $articles=[];
     try{
         $con = conDB();
-        $stt= $con->prepare('SELECT * FROM articles WHERE id>?');
-        $stt->execute([$numId]);
+        $stt= $con->prepare('SELECT * FROM articles WHERE id>:id AND autor=:email');
+        $stt->execute([":id"=>$numId,":email"=>$email]);
         $articles = $stt->fetchAll();
     }catch(PDOException $e){
         echo $e;
     }
     $lista="";
     $i=0;
-    if(isset($_SESSION["email"]))$email=$_SESSION["email"];
-    else $email="";
     foreach($articles as $article){
-        if($i<$numArtPag) {
-            if(strcmp($email,$article["autor"]))
+        if($i<$numArtPag && $article["autor"]==$email) {
             $lista .="<form action='../controlador/DUBD.php' method='post'><li>".$article["id"]."-.".$article["article"]." <br><strong>By:</strong> ".$article["autor"]."
             <br><input type='submit' class='button' name='esborrar' value='Esborrar' />  <input type='submit' class='button' name='modificar' value='Modificar' /><input type='hidden' name='id' value=".$article["id"].">
             </li></form>" ;
-            else $lista .="<li>".$article["id"]."-.".$article["article"]." <br><strong>By:</strong> ".$article["autor"]."</li>" ;;
         }else break;
         $i++;
     }
@@ -68,20 +65,20 @@ function mostrarNumPag(){
         $text.='<li class="disabled">&laquo;&laquo;</li>';
         $text.='<li class="disabled">&laquo;</li>';
     }elseif($numPagActual!=1){
-        $text.='<li class="enabled"><a href="../model/index.php?page=1&article='.$_GET["article"].'">&laquo;&laquo;</a></li>';
-        $text.='<li class="enabled"><a href="../model/index.php?page='.($numPagActual-1).'&article='.$numArticles.'">&laquo;</a></li>';
+        $text.='<li class="enabled"><a href="../model/articles.php?page=1&article='.$_GET["article"].'">&laquo;&laquo;</a></li>';
+        $text.='<li class="enabled"><a href="../model/articles.php?page='.($numPagActual-1).'&article='.$numArticles.'">&laquo;</a></li>';
     }
     for($i=1;$i<numPagina()+1;$i++){
         if($numPagActual==$i){
-            $text.='<li class="active"><a href="../model/index.php?page='.$i.'&article='.$numArticles.'">'.$i.'</a></li>';
-        }else $text.='<li><a href="../model/index.php?page='.$i.'&article='.$numArticles.'">'.$i.'</a></li>';
+            $text.='<li class="active"><a href="../model/articles.php?page='.$i.'&article='.$numArticles.'">'.$i.'</a></li>';
+        }else $text.='<li><a href="../model/articles.php?page='.$i.'&article='.$numArticles.'">'.$i.'</a></li>';
     }
     if($numPagActual==numPagina()){
         $text.='<li class="disabled">&raquo;</li>';
         $text.='<li class="disabled">&raquo;&raquo;</li>';
     }else {
-        $text.='<li class="enabled"><a href="../model/index.php?page='.($numPagActual+1).'&article='.$numArticles.'">&raquo;</a></li>';
-        $text.='<li class="enabled"><a href="../model/index.php?page='.numPagina().'&article='.$numArticles.'">&raquo;&raquo;</a></li>';
+        $text.='<li class="enabled"><a href="../model/articles.php?page='.($numPagActual+1).'&article='.$numArticles.'">&raquo;</a></li>';
+        $text.='<li class="enabled"><a href="../model/articles.php?page='.numPagina().'&article='.$numArticles.'">&raquo;&raquo;</a></li>';
     }
     echo $text;
 }

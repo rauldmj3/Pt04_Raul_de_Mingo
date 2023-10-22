@@ -13,7 +13,7 @@ function checkData(){
 }
 
 function login($email){
-    obrirArticlesSession($email);
+    require_once "../controlador/session.php";
     
 }
 require '../vista/login.vista.php';

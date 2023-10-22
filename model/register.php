@@ -23,7 +23,7 @@ function register($email,$name,$finalPass){
     }catch(PDOException $e){
         echo($e);
     }finally{
-        obrirArticlesSession($email);
+        require_once "../controlador/session.php";
     }
 }
 
